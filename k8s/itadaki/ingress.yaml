@@ -13,10 +13,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - itadaki.acme.local
+        - itadaki.acme.test
       secretName: itadaki-tls
   rules:
-    - host: itadaki.acme.local
+    - host: itadaki.acme.test
       http:
         paths:
           # /api/* → backend Java

@@ -8,16 +8,15 @@
 
 | Utilisateur | Groupe   | Email                | Secret key         |
 |-------------|----------|----------------------|--------------------|
-| admin1      | admins   | admin1@acme.local    | ADMIN1_PASSWORD    |
-| editor1     | editors  | editor1@acme.local   | EDITOR_PASSWORD    |
-| editor2     | editors  | editor2@acme.local   | EDITOR_PASSWORD    |
-| viewer1     | viewers  | viewer1@acme.local   | VIEWER_PASSWORD    |
-| viewer2     | viewers  | viewer2@acme.local   | VIEWER_PASSWORD    |
+| admin1      | admins   | admin1@acme.test    | ADMIN1_PASSWORD    |
+| editor1     | editors  | editor1@acme.test   | EDITOR_PASSWORD    |
+| editor2     | editors  | editor2@acme.test   | EDITOR_PASSWORD    |
+| viewer1     | viewers  | viewer1@acme.test   | VIEWER_PASSWORD    |
+| viewer2     | viewers  | viewer2@acme.test   | VIEWER_PASSWORD    |
 
 ## Accès Itadaki
 
-- URL : `https://itadaki.acme.local`
-- Ajouter `itadaki.acme.local` dans `/etc/hosts` pointant vers l'IP du nœud K3s
+- URL : `https://itadaki.acme.test`
 
 ## Compte admin LDAP (service)
 

@@ -51,7 +51,7 @@ uid: admin1
 cn: Admin One
 sn: One
 givenName: Admin
-mail: admin1@acme.local
+mail: admin1@acme.test
 userPassword: __ADMIN1_PW__
 
 # User editor1 (editors)
@@ -64,7 +64,7 @@ uid: editor1
 cn: Editor One
 sn: One
 givenName: Editor
-mail: editor1@acme.local
+mail: editor1@acme.test
 userPassword: __EDITOR_PW__
 
 # User editor2 (editors)
@@ -77,7 +77,7 @@ uid: editor2
 cn: Editor Two
 sn: Two
 givenName: Editor
-mail: editor2@acme.local
+mail: editor2@acme.test
 userPassword: __EDITOR_PW__
 
 # User viewer1 (viewers)
@@ -90,7 +90,7 @@ uid: viewer1
 cn: Viewer One
 sn: One
 givenName: Viewer
-mail: viewer1@acme.local
+mail: viewer1@acme.test
 userPassword: __VIEWER_PW__
 
 # User viewer2 (viewers)
@@ -103,5 +103,5 @@ uid: viewer2
 cn: Viewer Two
 sn: Two
 givenName: Viewer
-mail: viewer2@acme.local
+mail: viewer2@acme.test
 userPassword: __VIEWER_PW__

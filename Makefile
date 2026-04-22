@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-.PHONY: all namespaces secrets multus-install multus ldap app monitoring backup velero netpol restore test-netpol scope scope-ui
+.PHONY: all namespaces secrets multus-install multus ldap app monitoring backup velero netpol restore test-netpol scope ingresses hosts
 
 all: namespaces secrets multus ldap monitoring backup
 
@@ -56,18 +56,25 @@ test-netpol:
 scope:
 	kubectl apply -f https://github.com/weaveworks/scope/releases/download/v1.13.2/k8s-scope.yaml
 	kubectl rollout status deployment/weave-scope-app -n weave --timeout=120s
+	kubectl apply -f k8s/ingresses/scope-ingress.yaml
 
-# Ouvre l'UI sur http://localhost:4040
-scope-ui:
-	@echo "Weave Scope UI → http://localhost:4040"
-	kubectl port-forward -n weave svc/weave-scope-app 4040:80
+# ── Ingress pour les UIs (Grafana, Prometheus, Alertmanager, ArgoCD, Scope) ───
+ingresses:
+	kubectl apply -f k8s/ingresses/
+
+# Injecte les entrées acme.test dans /etc/hosts de ta machine locale (nécessite sudo)
+hosts:
+	@NODE_IP=$$(kubectl get nodes -o jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}') && \
+	sudo sed -i '' '/acme\.test/d' /etc/hosts && \
+	echo "$$NODE_IP  itadaki.acme.test grafana.acme.test prometheus.acme.test alertmanager.acme.test argocd.acme.test scope.acme.test" | sudo tee -a /etc/hosts && \
+	echo "✓ /etc/hosts mis à jour → $$NODE_IP"
 
 # ── Velero + Minio ────────────────────────────────────────────────────────────
 # Prérequis : make secrets (génère minio-secret + velero-s3-credentials)
 velero:
 	kubectl apply -f k8s/velero/minio.yaml
 	kubectl rollout status deployment/minio -n velero --timeout=120s
-	kubectl wait --for=condition=complete job/minio-create-bucket -n velero --timeout=60s
+	kubectl wait --for=condition=complete job/minio-create-bucket -n velero --timeout=200s
 	helm repo add vmware-tanzu https://vmware-tanzu.github.io/helm-charts || true
 	helm repo update
 	helm upgrade --install velero vmware-tanzu/velero \
