@@ -1,0 +1,7 @@
+[submodule "itadaki"]
+	path = itadaki
+	url = git@github.com:M4XGO/itadaki.git
+[submodule "terraform-kube"]
+	path = terraform-kube
+	url = git@github.com:M4XGO/terraform-kube.git
+	branch = feat/proxmox
